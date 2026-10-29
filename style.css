@@ -1,0 +1,346 @@
+/* ==========================================================================
+   1. RESET & CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #172B4D;
+    background-color: #FAFBFC;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==========================================================================
+   2. HEADER / NAVEGAÇÃO SUPERIOR
+   ========================================================================== */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #DFE1E6;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #0052CC;
+    letter-spacing: -0.5px;
+}
+
+.main-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+
+.main-menu a {
+    color: #42526E;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.main-menu a:hover {
+    color: #0052CC;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #EBECF0;
+}
+
+/* ==========================================================================
+   3. LAYOUT PRINCIPAL (CONTAINER)
+   ========================================================================== */
+.container {
+    display: flex;
+    max-width: 1280px;
+    margin: 32px auto;
+    padding: 0 24px;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* ==========================================================================
+   4. SIDEBAR (MENU LATERAL)
+   ========================================================================== */
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    flex-shrink: 0;
+    background: #FFFFFF;
+    border: 1px solid #DFE1E6;
+    border-radius: 8px;
+    padding: 16px 0;
+    position: sticky;
+    top: 85px;
+    box-shadow: 0 1px 3px rgba(9, 30, 66, 0.08);
+}
+
+.sidebar-title {
+    display: block;
+    font-size: 0.75rem;
+    color: #6B778C;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 0 20px 12px;
+    border-bottom: 1px solid #EBECF0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid #F4F5F7;
+}
+
+.sidebar-menu li:last-child {
+    border-bottom: none;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 11px 20px;
+    color: #172B4D;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-menu a:hover {
+    background-color: #F4F5F7;
+    color: #0052CC;
+}
+
+/* Submenu sanfona */
+.submenu {
+    display: none;
+    list-style: none;
+    background-color: #F8F9FA;
+    border-top: 1px solid #EBECF0;
+}
+
+.submenu.open {
+    display: block;
+}
+
+.submenu a {
+    padding: 9px 20px 9px 36px;
+    font-weight: 400;
+    font-size: 0.88rem;
+    color: #42526E;
+    border-bottom: none;
+}
+
+.submenu a:hover {
+    color: #0052CC;
+    background-color: #EBECF0;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   5. ÁREA DE CONTEÚDO PRINCIPAL
+   ========================================================================== */
+.content {
+    flex: 1;
+    min-width: 0;
+    background: #FFFFFF;
+    border: 1px solid #DFE1E6;
+    border-radius: 8px;
+    padding: 36px 48px;
+    box-shadow: 0 1px 3px rgba(9, 30, 66, 0.08);
+}
+
+.content h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #091E42;
+    border-bottom: 2px solid #EBECF0;
+    padding-bottom: 12px;
+}
+
+.content h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0052CC;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.content h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #091E42;
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.content p {
+    margin-bottom: 16px;
+    font-size: 0.98rem;
+    color: #172B4D;
+    line-height: 1.65;
+    text-align: justify;
+}
+
+.content code {
+    background: #F4F5F7;
+    color: #BF2600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: SFMono-Medium, "SF Mono", Consolas, monospace;
+    font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   6. LISTAS E INSTRUÇÕES
+   ========================================================================== */
+.lista-passos {
+    list-style-type: decimal;
+    padding-left: 24px;
+    margin-bottom: 20px;
+}
+
+.lista-passos li {
+    margin-bottom: 10px;
+    color: #172B4D;
+    line-height: 1.6;
+    padding-left: 4px;
+}
+
+.lista-permissoes {
+    list-style-type: disc;
+    padding-left: 24px;
+    margin-bottom: 20px;
+}
+
+.lista-permissoes li {
+    margin-bottom: 12px;
+    color: #172B4D;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   7. MOLDURAS PARA AS IMAGENS / PRINTS
+   ========================================================================== */
+.print-container,
+.passo-imagem-container {
+    width: 100%;
+    background-color: #F8FAFC;
+    border: 1px solid #DFE1E6;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 12px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 4px rgba(9, 30, 66, 0.04);
+}
+
+.print-img,
+.passo-imagem-container img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    border: 1px solid #CBD5E1;
+}
+
+/* ==========================================================================
+   8. RESPONSIVIDADE (TABLETS E CELULARES)
+   ========================================================================== */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        gap: 24px;
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+        position: static;
+    }
+
+    .content {
+        padding: 24px 20px;
+    }
+
+    .main-menu {
+        display: none; /* Em telas menores esconde o menu textual para priorizar a leitura */
+    }
+}
+
+/* Item ativo dentro do submenu */
+.submenu a.item-ativo {
+    background-color: #DEEBFF;
+    color: #0052CC;
+    font-weight: 600;
+    border-left: 3px solid #0052CC;
+    padding-left: 33px; /* Compensa a borda para não deslocar o texto */
+}
+
+/* Indicador visual de submenu aberto */
+.submenu-toggle.ativo {
+    color: #0052CC;
+}
+/* Garante que os dois fiquem lado a lado */
+.container {
+    display: flex !important;
+    flex-direction: row !important; /* Força direção horizontal */
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+    gap: 30px;
+    align-items: flex-start; /* Alinha ambos pelo topo */
+}
+
+/* Impede a barra lateral de colapsar */
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    flex-shrink: 0; /* Nunca deixa encolher nem quebrar linha */
+}
+
+/* Força a área de conteúdo a ocupar o restante espaço ao lado */
+.content {
+    flex: 1 1 0;
+    min-width: 0;   /* FUNDAMENTAL: impede que imagens largas empurrem o bloco para baixo */
+    width: 100%;
+}

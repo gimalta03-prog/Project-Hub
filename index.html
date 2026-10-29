@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Project Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">
+            <span>Project Hub</span>
+        </div>
+        <nav class="main-menu">
+            <ul>
+                <li><a href="#">Funções</a></li>
+                <li><a href="#">Soluções</a></li>
+                <li><a href="#">Guias</a></li>
+                <li><a href="#">Templates</a></li>
+                <li><a href="#">Preços</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="search-btn" aria-label="Pesquisar">🔍</button>  
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+            <span class="sidebar-title">GUIA DO PROJECT HUB</span>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" onclick="toggleSubmenu(event, 'submenu-intro')">› Introdução</a>
+                    <ul id="submenu-intro" class="submenu">
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-oque-e')">O que é Project Hub?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-como-usar')">Como Usar?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleSubmenu(event, 'submenu-passos')">› Primeiros Passos</a>
+                    <ul id="submenu-passos" class="submenu">
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-perfil-credenciais')">Como configurar perfil e credenciais?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-como-criar-projeto')">Como Criar um projeto?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-niveis-de-pagina')">Entendendo os níveis de acesso e permissões</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-alterar-permissoes')">Como alterar as permissões de um membro no projeto</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleSubmenu(event, 'submenu-funcoes')">› Funções do Projeto</a>
+                    <ul id="submenu-funcoes" class="submenu">
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-fases-do-projeto')">Como funcionam as fases do projeto?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-como-criar-pendencias')">Como criar uma pendência?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-adicionar-especialidade')">Como adicionar especialidades?</a></li>
+                        <li><a href="#" onclick="mudarConteudo(event, 'pagina-equipe-gestao')">Como definir equipe de gestão?</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">› Tickets/itens</a></li>
+                <li><a href="#">› Fields</a></li>
+                <li><a href="#">› Fluxos de trabalho</a></li>
+                <li><a href="#">› Engenharia agêntica</a></li>
+            </ul>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL DE CONTEÚDO (FICA AO LADO DA SIDEBAR) -->
+        <main class="content">
+            
+            <!-- Introdução: O que é -->
+            <div id="pagina-oque-e" class="secao-conteudo">
+                <h1>Introdução</h1>
+                <h2>O que é Project Hub?</h2>
+                <p>O Project HUB é a plataforma corporativa interna desenvolvida para centralizar a gestão, o planejamento e o acompanhamento de projetos de engenharia e automação industrial da Comau. Ele unifica em um único ambiente digital o acompanhamento operacional e executivo, permitindo monitorar o progresso físico de cronogramas, entregas técnicas (milestones e Design Reviews), resolução de pendências e alocação de equipes multidisciplinares.</p>
+            </div>
+
+            <!-- Introdução: Como Usar -->
+            <div id="pagina-como-usar" class="secao-conteudo" style="display: none;">
+                <h1>Introdução</h1>
+                <h2>1.2 Como usar o Project HUB?</h2>
+                <p>Ao entrar na plataforma, você pode alternar o trabalho no dashboard entre 4 modos de navegação: <strong>Visão Geral</strong> (cards de resumo e KPIs), <strong>Projetos</strong> (explorador de workspaces), <strong>Lista</strong> (suas tarefas pessoais) e <strong>Board</strong> (quadros Kanban). No topo da tela, utilize o alternador para trocar de projeto rapidamente.</p>
+                <p>A plataforma organiza a navegação em duas camadas principais: o <strong>nível global</strong> (portfólio geral e sua rotina) e o <strong>nível de projeto</strong> (o workspace técnico de cada contrato/escopo)[cite: 1].</p>
+
+                <h3>1.2.1 Camada Global (Seu Painel Geral)</h3>
+                <ul class="lista-permissoes">
+                    <li>
+                        <strong>Visão Geral:</strong> Apresenta um panorama rápido do seu dia a dia de trabalho. Reúne a linha do tempo consolidada dos projetos em andamento, alertas de marcos contratuais próximos, atalhos para suas pendências e o feed de atividades recentes[cite: 1].
+                        <div class="print-container">
+                            <img src="Prints Camada Global/1. Visão_Geral.png" alt="Painel Geral de Visão Geral" class="print-img">
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Projetos:</strong> Lista todos os projetos internos da empresa em que você participa ou aos quais pode solicitar acesso[cite: 2]. Exibe cliente, percentual de progresso, volume de tarefas e equipe[cite: 2]. É por onde novos projetos são criados via botão <strong>"+ Criar projeto"</strong>[cite: 2].
+                        <div class="print-container">
+                            <img src="Prints Camada Global/2. Projetos.png" alt="Painel Geral de Projetos" class="print-img">
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Minhas Tarefas:</strong> Painel focado nas atividades e demandas individuais atribuídas diretamente ao seu usuário[cite: 2].
+                        <div class="print-container">
+                            <img src="Prints Camada Global/3. Minhas tarefas.png" alt="Minhas Tarefas" class="print-img">
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Configurações e Suporte:</strong> Acessos na barra lateral inferior para ajustar parâmetros do sistema e consultar a Central de Ajuda[cite: 3].
+                        <div class="print-container">
+                            <img src="Prints Camada Global/3. conf_ajuda.png" alt="Configurações e Suporte" class="print-img">
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>1.2.2 Camada de Projeto (Dentro de um Workspace Ativo)</h3>
+                <p>Ao selecionar um projeto específico (como o <em>Projeto Piloto - Treinamento</em>), a barra superior abre as ferramentas de acompanhamento do escopo[cite: 3]:</p>
+
+                <ul class="lista-permissoes">
+                    <li>
+                        <strong>Visão Geral:</strong> Painel executivo do projeto selecionado[cite: 3]:
+                        <ul style="list-style-type: circle; padding-left: 20px; margin-top: 8px;">
+                            <li style="margin-bottom: 8px;">
+                                <strong>Curva S de Evolução:</strong> Gráfico que compara o avanço planejado versus o realizado, apontando os desvios de cronograma em pontos percentuais[cite: 3].
+                                <div class="print-container">
+                                    <img src="Prints Camada de Projetos/1. Curva S.png" alt="Curva S de Evolução" class="print-img">
+                                </div>   
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <strong>Desempenho por Especialidade:</strong> Monitoramento detalhado das disciplinas técnicas do projeto (Projeto 3D, Simulação, Ciclograma, R.A.M.S., OLP, Hardware, Fluídica, Software Offline e Comissionamento Virtual)[cite: 4].
+                                <div class="print-container" style="margin-top: 10px;">
+                                    <img src="Prints Camada de Projetos/2. Desempenho por especialdiade.png" alt="Desempenho por Especialidade" class="print-img">
+                                </div>
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <strong>Milestones:</strong> Acompanhamento dos marcos contratuais e revisões formais de engenharia (DR1, DR2, DR3, liberações de conceito e processamento), com contagem de dias restantes e status[cite: 4].
+                                <div class="print-container" style="margin-top: 10px;">
+                                    <img src="Prints Camada de Projetos/3. Milestones.png" alt="Milestones" class="print-img">
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <strong>Pendências:</strong> Quadro de registro e tratativa de desvios técnicos e operacionais[cite: 5]. Permite criar pendências, definir prioridades, apontar prazos de resolução e designar responsáveis[cite: 5].
+                        <div class="print-container">
+                            <img src="Prints Camada de Projetos/4. Pendencias.png" alt="Quadro de Pendências" class="print-img">
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Equipe:</strong> Gestão dos colaboradores alocados no projeto, detalhando seus departamentos, calendários de trabalho e níveis de permissão interna[cite: 5].
+                        <div class="print-container">
+                            <img src="Prints Camada de Projetos/5. Equipe.png" alt="Quadro de Equipe" class="print-img">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Perfil e Credenciais -->
+            <div id="pagina-perfil-credenciais" class="secao-conteudo" style="display: none;">
+                <h1>Primeiros Passos</h1>
+                <h2>Como configurar perfil e credenciais?</h2>
+                <p>Para personalizar suas informações, alterar sua senha ou gerenciar suas preferências no Project Hub, você precisará acessar a área de configurações da sua conta.</p>
+
+                <h3>Passo 1: Clicar sobre seu nome</h3>
+                <ol class="lista-passos">
+                    <li>Após fazer o login, você será direcionado para a tela principal (<strong>Visão geral</strong>).</li>
+                    <li>Localize o seu nome completo e o seu avatar (círculo com suas iniciais) no canto superior direito da tela.</li>
+                    <li>Clique sobre o seu nome ou avatar para abrir o menu de opções do perfil.</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo1.png" alt="Acesso ao menu do perfil" class="print-img">
+                </div>
+                <h3>Passo 2: Acesse o menu do perfil</h3>
+                <ol class="lista-passos">
+                    <li>Clique em “Minha conta”.</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo2.jpg" alt="Acesso ao menu do perfil" class="print-img">
+                </div>
+
+                <h3>Passo 3: Personalize suas informações e preferências</h3>
+                <ol class="lista-passos">
+                    <li><strong>Foto de perfil:</strong> Para atualizar sua foto de exibição, clique no botão "Alterar foto" (arquivos suportados: JPG, PNG ou WebP com até 2 MB).</li>
+                    <li><strong>Informações pessoais:</strong> Confira ou edite seu <strong>Nome completo</strong> e seu <strong>Departamento</strong> nos campos de texto. O campo <strong>E-mail corporativo</strong> exibe o endereço vinculado à sua conta.</li>                   
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo3.png" alt="Personalização de informações e preferências" class="print-img">
+                </div>
+                <h3>Passo 4: Dados e Preferências</h3>
+                <ol class="lista-passos">
+                    <li><strong>Preferências:</strong> Escolha o <strong>Tema da interface</strong> de sua preferência (<strong>Claro</strong>, <strong>Escuro</strong> ou sincronizado com o <strong>Sistema</strong>) e selecione o <strong>Idioma</strong> no menu suspenso.</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo4.png" alt="Acesso ao menu do perfil" class="print-img">
+                </div>
+                <h3>Passo 5: Altere sua senha (se necessário)</h3>
+                <ol class="lista-passos">
+                    <li>Na seção <strong>Senha e segurança</strong>, digite sua <strong>Senha atual</strong>.</li>
+                    <li>No campo <strong>Nova senha</strong>, crie a combinação desejada respeitando os requisitos (mínimo de 8 caracteres, com pelo menos um número e um símbolo).</li>
+                    <li>Digite novamente a mesma chave no campo <strong>Confirmar nova senha</strong>.</li>
+                    <li>Clique no botão "Alterar senha" para concluir a redefinição de segurança.</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo5.png" alt="Alteração de senha e segurança" class="print-img">
+                </div>
+
+                <h3>Passo 6: Salve as alterações</h3>
+                <ol class="lista-passos">
+                    <li>Após atualizar suas informações cadastrais ou preferências de interface, clique no botão azul <strong>"Salvar alterações"</strong>, localizado no canto inferior direito da página.</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints perfil/Passo6.png" alt="Alteração de senha e segurança" class="print-img">
+                </div>
+            </div>
+
+            <!-- Como Criar Projeto -->
+            <div id="pagina-como-criar-projeto" class="secao-conteudo" style="display: none;">
+                <h1>Primeiros Passos</h1>
+                <h2>Como Criar um projeto?</h2>
+                <video controls playsinline preload="metadata" style="max-width: 100%; height: auto; display: block;">
+                <source src="Prints_CriarProjeto/video.mp4" type="video/mp4">></video>
+                
+            </div>
+
+            <!-- Níveis de Acesso e Permissões -->
+            <div id="pagina-niveis-de-pagina" class="secao-conteudo" style="display: none;">
+                <h1>Primeiros Passos</h1>
+                <h2>Entendendo os níveis de acesso e permissões</h2>
+                <p>No Project HUB, o acesso às ações dentro de cada projeto é controlado por perfis de função específicos, garantindo governança técnica e segurança na edição do escopo e dos prazos.</p>
+
+                <h3>Níveis de Permissão no Projeto</h3>
+                <ul class="lista-permissoes">
+                    <li><strong>Administrador:</strong> Possui controle total sobre o projeto. Pode gerenciar membros e atribuir permissões, editar a estrutura do cronograma, ajustar todas as configurações do workspace e excluir o projeto.</li>
+                    <li><strong>Gestor:</strong> Focado na condução operacional. Edita o cronograma, ajusta as configurações operacionais e gerencia membros da equipe (exceto outros Administradores). Não tem permissão para excluir o projeto.</li>
+                    <li><strong>Membro:</strong> Perfil de execução técnica. Tem permissão para atualizar o avanço percentual e os dados das tarefas que estão atribuídas diretamente a ele, sem permissão para alterar a estrutura de prazos ou dependências do cronograma.</li>
+                    <li><strong>Visualizador:</strong> Acesso restrito para consulta em modo somente leitura (read-only). Permite acompanhar o andamento, dashboards e pendências sem realizar edições ou alterações no conteúdo.</li>
+                </ul>
+            </div>
+
+            <!-- Alterar Permissões -->
+            <div id="pagina-alterar-permissoes" class="secao-conteudo" style="display: none;">
+                <h1>Primeiros Passos</h1>
+                <h2>Como alterar as permissões de um membro no projeto[cite: 7, 8]</h2>
+
+                <h3>Passo 1: Acesse a área de equipe[cite: 8]</h3>
+                <ol class="lista-passos">
+                    <li>Abra o workspace do projeto no qual deseja realizar a alteração[cite: 8].</li>
+                    <li>Na barra de navegação superior, clique na aba <strong>"Equipe"</strong>[cite: 8].</li>
+                    <li>Certifique-se de estar na sub-aba <strong>"Membros"</strong>[cite: 8].</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints permissões/Passo1.png" alt="Como alterar as permissões de um membro" class="print-img">
+                </div>
+                <h3>Passo 2: Localize o usuário[cite: 8]</h3>
+                <ol class="lista-passos">
+                    <li>Na lista de colaboradores, utilize a barra de busca <strong>"Buscar membros"</strong> ou localize o nome do colaborador manualmente na tabela[cite: 8].</li>
+                    <li>Identifique a linha correspondente ao usuário e vá até a coluna <strong>"Permissão"</strong>[cite: 8].</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints permissões/Passo2.png" alt="Como alterar as permissões de um membro" class="print-img">
+                </div>
+                <h3>Passo 3: Altere o papel de acesso[cite: 8]</h3>
+                <ol class="lista-passos">
+                    <li>Clique no botão de seleção suspenso (dropdown) que exibe a permissão atual do membro (por exemplo, onde consta <strong>"Administrador"</strong>)[cite: 8].</li>
+                    <li>Na lista de opções suspensa, selecione o novo papel desejado (<strong>Administrador</strong>, <strong>Gestor</strong>, <strong>Membro</strong> ou <strong>Visualizador</strong>)[cite: 8].</li>
+                    <li>A nova permissão é aplicada imediatamente ao usuário no projeto correspondente[cite: 8].</li>
+                </ol>
+                <div class="print-container">
+                    <img src="Prints permissões/Passo3.png" alt="Como alterar as permissões de um membro" class="print-img">
+                </div>
+            </div>
+
+            <!-- Fases do Projeto -->
+            <div id="pagina-fases-do-projeto" class="secao-conteudo" style="display: none;">
+                <h1>Funções do Projeto</h1>
+                <h2>Como funcionam as fases do projeto (Planejamento, Ativo e Concluído)?</h2>
+                <p>O ciclo de vida dos projetos dentro do Project HUB é organizado em três fases principais de governança:</p>
+                <ul class="lista-permissoes">
+                    <li><strong>Planejamento (PLANNING):</strong> Fase preliminar onde a estrutura de tópicos (WBS), metas e líderes são associados antes do início dos trabalhos práticos.</li>
+                    <li><strong>Ativo (ACTIVE):</strong> Etapa na qual o projeto está em desenvolvimento contínuo, com apontamento de horas, resolução de pendências e atualizações de percentual de conclusão.</li>
+                    <li><strong>Concluído (CLOSED):</strong> Encerramento formal do cronograma, onde o workspace passa a ficar arquivado ou em modo somente leitura para auditoria.</li>
+                </ul>
+            </div>
+
+            <!-- Como Criar Pendências -->
+            <div id="pagina-como-criar-pendencias" class="secao-conteudo" style="display: none;">
+                <h1>Funções do Projeto</h1>
+                <h2>Como criar uma pendência?</h2>
+
+                <h3>Passo 1 — Acessar Pendências</h3>
+                <p>No menu superior do projeto, clique na aba <strong>Pendências</strong> para abrir a tela de gerenciamento.</p>
+                <div class="print-container">
+                    <img src="Prints pendencias/Passo1.png" alt="Acessar Pendências" class="print-img">
+                </div>
+
+                <h3>Passo 2 — Iniciar Nova Pendência</h3>
+                <p>No canto superior direito da tela, clique no botão roxo <strong>+ Criar pendência</strong> para abrir a janela de cadastro.</p>
+                <div class="print-container">
+                    <img src="Prints pendencias/Passo2.png" alt="Iniciar Nova Pendência" class="print-img">
+                </div>
+
+                <h3>Passo 3 — Preencher os Dados</h3>
+                <p>Preencha os campos com as informações da ocorrência:</p>
+                <div class="print-container">
+                    <img src="Prints pendencias/Passo3.png" alt="Preencher os Dados da Pendência" class="print-img">
+                </div>
+
+                <h3>Passo 4 — Concluir e Guardar</h3>
+                <p>Confira as informações preenchidas e clique no botão <strong>Criar pendência</strong>, localizado no canto inferior direito, para salvar o registro.</p>
+                <div class="print-container">
+                    <img src="Prints pendencias/Passo4.png" alt="Concluir e Guardar Pendência" class="print-img">
+                </div>
+
+                <h3>Passo 5 — Pendência Ativa</h3>
+                <p>A nova pendência passa a constar diretamente na lista com o status <strong>Aberta</strong>, exibindo o prazo estipulado e o responsável definido.</p>
+                <div class="print-container">
+                    <img src="Prints pendencias/Passo5.png" alt="Pendência Ativa na Lista" class="print-img">
+                </div>
+            </div>
+
+            <!-- Adicionar Especialidades -->
+            <div id="pagina-adicionar-especialidade" class="secao-conteudo" style="display: none;">
+                <h1>Funções do Projeto</h1>
+                <h2>Como adicionar especialidades?</h2>
+
+                <h3>Passo 1 — Acessar Equipe</h3>
+                <p>Na tela inicial do projeto, clique na aba <strong>Equipe</strong> no menu superior.</p>
+                <div class="print-container">
+                    <img src="Prints especialidade/Passo1.png" alt="Acessar Equipe" class="print-img">
+                </div>
+
+                <h3>Passo 2 — Entrar em Especialidades</h3>
+                <p>Dentro da área de equipe, selecione a aba <strong>Especialidades</strong>, localizada ao lado de "Gestão".</p>
+                <div class="print-container">
+                    <img src="Prints especialidade/Passo2.png" alt="Entrar em Especialidades" class="print-img">
+                </div>
+                
+                <h3>Passo 3 — Criar Nova Especialidade</h3>
+                <p>No canto superior direito da lista, clique no botão roxo <strong>+ Nova especialidade</strong> para habilitar o campo de cadastro.</p>
+                <div class="print-container">
+                    <img src="Prints especialidade/Passo3.png" alt="Criar Nova Especialidade" class="print-img">
+                </div>
+                
+                <h3>Passo 4 — Digitar o Nome e Salvar</h3>
+                <p>Digite o nome desejado na caixa de texto em branco que apareceu no final da lista e clique no botão <strong>Adicionar</strong> para salvar.</p>
+                <div class="print-container">
+                    <img src="Prints especialidade/Passo4.png" alt="Digitar Nome e Salvar Especialidade" class="print-img">
+                </div>
+            </div>
+
+            <!-- Equipe de Gestão -->
+            <div id="pagina-equipe-gestao" class="secao-conteudo" style="display: none;">
+                <h1>Funções do Projeto</h1>
+                <h2>Como definir equipe de gestão?</h2>
+
+                <h3>Página 1: Visão Geral do Projeto</h3>
+                <p>A partir da tela principal de Visão geral, localize o menu superior de navegação e clique na opção <strong>Equipe</strong> para acessar a gestão de membros e o organograma de liderança do projeto.</p>
+                <div class="print-container">
+                    <img src="Prints_Gestao/Passo1.png" alt="Visão Geral do Projeto - Aba Equipe" class="print-img">
+                </div>
+
+                <h3>Página 2: Painel da Equipe</h3>
+                <p>A tela inicial exibe a lista geral de todos os membros cadastrados. Para abrir o organograma com os papéis executivos, clique na sub-aba <strong>Gestão</strong>, localizada logo abaixo do título principal.</p>
+                <div class="print-container">
+                    <img src="Prints_Gestao/Passo2.png" alt="Painel da Equipe - Sub-aba Gestão" class="print-img">
+                </div>
+
+                <h3>Página 3: Organograma de Papéis</h3>
+                <p>O painel apresenta os cargos de liderança, como Gerente de Projeto, Líder Técnico - Controls e Líder Técnico - Mecânica. Para definir os responsáveis, clique no botão <strong>+ Atribuir</strong> para pesquisar e selecionar o nome do colaborador, ou clique em <strong>Atribuir a mim</strong> caso queira assumir o papel diretamente.</p>
+                <div class="print-container">
+                    <img src="Prints_Gestao/Passo3.png" alt="Organograma de Papéis e Atribuição" class="print-img">
+                </div>
+
+                <h3>Página 4: Confirmação da Gestão</h3>
+                <p>Após a confirmação, os nomes e avatares dos gestores selecionados passam a ser exibidos dentro do respectivo card. A plataforma permite definir múltiplos responsáveis para o mesmo papel executivo; para incluir mais pessoas, basta clicar novamente em <strong>+ Atribuir</strong> logo abaixo dos nomes já listados.</p>
+                <div class="print-container">
+                    <img src="Prints_Gestao/Passo4.png" alt="Confirmação da Equipe de Gestão" class="print-img">
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+    function toggleSubmenu(event, id) {
+        event.preventDefault(); 
+        const submenu = document.getElementById(id);
+        const trigger = event.currentTarget;
+
+        if (submenu) {
+            submenu.classList.toggle('open');
+            trigger.classList.toggle('ativo');
+        }
+    }
+
+    function mudarConteudo(event, idPagina) {
+        event.preventDefault(); 
+
+        const todasSecoes = document.querySelectorAll('.secao-conteudo');
+        todasSecoes.forEach(function(secao) {
+            secao.style.display = 'none';
+        });
+
+        const secaoParaMostrar = document.getElementById(idPagina);
+        if (secaoParaMostrar) {
+            secaoParaMostrar.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const todosLinks = document.querySelectorAll('.sidebar-menu a');
+        todosLinks.forEach(function(link) {
+            link.classList.remove('item-ativo');
+        });
+
+        if (event.currentTarget) {
+            event.currentTarget.classList.add('item-ativo');
+            
+            const submenuPai = event.currentTarget.closest('.submenu');
+            if (submenuPai && !submenuPai.classList.contains('open')) {
+                submenuPai.classList.add('open');
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const primeiroLink = document.querySelector('.sidebar-menu .submenu a');
+        const primeiroSubmenu = document.querySelector('.submenu');
+        
+        if (primeiroSubmenu) {
+            primeiroSubmenu.classList.add('open');
+        }
+        if (primeiroLink) {
+            primeiroLink.classList.add('item-ativo');
+        }
+    });
+    </script>
+</body>
+</html>
