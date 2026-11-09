@@ -344,3 +344,21 @@ a {
     min-width: 0;   /* FUNDAMENTAL: impede que imagens largas empurrem o bloco para baixo */
     width: 100%;
 }
+/* --- ESTILO PADRÃO (PC) --- */
+.coluna {
+  width: 50%; /* Duas colunas lado a lado no PC */
+  display: inline-block;
+}
+
+/* --- ESTILO PARA CELULAR --- */
+/* Tudo que estiver aqui dentro só funciona em telas menores que 768px */
+@media (max-width: 768px) {
+  .coluna {
+    width: 100%; /* A coluna agora ocupa a tela toda no celular (empilhada) */
+    display: block;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
