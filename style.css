@@ -362,3 +362,24 @@ img {
   max-width: 100%;
   height: auto;
 }
+@media (max-width: 768px) {
+  /* Se o elemento que segura o menu e o texto usar display: flex */
+  .container-principal {
+    flex-direction: column; /* Muda a direção de lado-a-lado para cima-e-baixo */
+  }
+
+  /* Força ambos a ocuparem todo o ecrã */
+  .menu-lateral, .conteudo {
+    width: 100%; 
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .menu-lateral {
+    display: none; /* Esconde o menu completamente no telemóvel */
+  }
+
+  .conteudo {
+    width: 100%; /* O conteúdo expande para ocupar o espaço livre */
+  }
+}
