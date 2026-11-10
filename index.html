@@ -17,9 +17,24 @@
         <!-- Menu central removido daqui -->
 
         <div class="nav-actions">
-            <input type="text" id="caixaBusca" placeholder="Pesquisar no guia...">
+    <!-- Adicionamos um contentor para manter a caixa de resultados agarrada à barra -->
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <input type="text" id="caixaBusca" placeholder="Pesquisar no guia..." autocomplete="off">
             <button class="search-btn" aria-label="Pesquisar" onclick="acionarLupa()">🔍</button>
         </div>
+        
+        <!-- Esta é a nova caixa flutuante de resultados (inspirada na imagem 5) -->
+        <div id="resultadosBusca" class="search-dropdown" style="display: none;">
+            <div class="search-header">
+                <span class="search-label">✨ Resultados Sugeridos</span>
+            </div>
+            <ul id="listaResultados" class="search-results-list">
+                <!-- Os resultados vão aparecer aqui via JavaScript -->
+            </ul>
+        </div>
+    </div>
+</div>
     </header>
     <div class="container">
         <!-- BARRA LATERAL -->
@@ -381,6 +396,9 @@
     </div>
 
     <script>
+    /* ==========================================================================
+       1. CÓDIGO DO MENU LATERAL (Navegação Antiga - MANTIDA)
+       ========================================================================== */
     function toggleSubmenu(event, id) {
         event.preventDefault(); 
         const submenu = document.getElementById(id);
@@ -421,119 +439,145 @@
         }
     }
 
-   document.addEventListener('DOMContentLoaded', function() {
+    // Abre o primeiro separador por defeito ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        const primeiroLink = document.querySelector('.sidebar-menu .submenu a');
+        const primeiroSubmenu = document.querySelector('.submenu');
+        
+        if (primeiroSubmenu) {
+            primeiroSubmenu.classList.add('open');
+        }
+        if (primeiroLink) {
+            primeiroLink.classList.add('item-ativo');
+        }
+    });
+
+    /* ==========================================================================
+       2. NOVO CÓDIGO DA PESQUISA COM DROPDOWN FLUTUANTE
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', function() {
         const caixaBusca = document.getElementById('caixaBusca');
+        const dropdownResultados = document.getElementById('resultadosBusca');
+        const listaResultados = document.getElementById('listaResultados');
+        
+        // Mapeamento das páginas para a pesquisa
+        const paginasIndexadas = [
+            { id: 'pagina-oque-e', titulo: 'O que é o Project Hub?', menuId: 'submenu-intro' },
+            { id: 'pagina-como-usar', titulo: 'Como usar o Project HUB?', menuId: 'submenu-intro' },
+            { id: 'pagina-perfil-credenciais', titulo: 'Como configurar perfil e credenciais?', menuId: 'submenu-passos' },
+            { id: 'pagina-como-criar-projeto', titulo: 'Como Criar um projeto?', menuId: 'submenu-passos' },
+            { id: 'pagina-niveis-de-pagina', titulo: 'Entendendo os níveis de acesso e permissões', menuId: 'submenu-passos' },
+            { id: 'pagina-alterar-permissoes', titulo: 'Como alterar as permissões de um membro no projeto', menuId: 'submenu-passos' },
+            { id: 'pagina-fases-do-projeto', titulo: 'Como funcionam as fases do projeto?', menuId: 'submenu-funcoes' },
+            { id: 'pagina-como-criar-pendencias', titulo: 'Como criar uma pendência?', menuId: 'submenu-funcoes' },
+            { id: 'pagina-adicionar-especialidade', titulo: 'Como adicionar especialidades?', menuId: 'submenu-funcoes' },
+            { id: 'pagina-equipe-gestao', titulo: 'Como definir equipe de gestão?', menuId: 'submenu-funcoes' },
+            { id: 'pagina-cronograma', titulo: 'Visão geral do Cronograma', menuId: 'submenu-funcoes' }
+        ];
+
         if(caixaBusca) {
-            caixaBusca.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    filtrarMenu();
+            caixaBusca.addEventListener('input', function(e) {
+                const textoBusca = e.target.value.toLowerCase().trim();
+                
+                // Só pesquisa se tiver pelo menos 2 letras
+                if (textoBusca.length < 2) {
+                    dropdownResultados.style.display = 'none';
+                    return;
+                }
+
+                listaResultados.innerHTML = ''; // Limpa resultados anteriores
+                let encontrouAlgo = false;
+
+                paginasIndexadas.forEach(paginaInfo => {
+                    const elementoPagina = document.getElementById(paginaInfo.id);
+                    if (!elementoPagina) return;
+
+                    const conteudoTexto = elementoPagina.innerText.toLowerCase();
+                    const tituloBase = paginaInfo.titulo.toLowerCase();
+                    
+                    if (conteudoTexto.includes(textoBusca) || tituloBase.includes(textoBusca)) {
+                        encontrouAlgo = true;
+                        
+                        // Cria um resumo (snippet) do texto encontrado
+                        let snippet = "";
+                        const indice = conteudoTexto.indexOf(textoBusca);
+                        if (indice !== -1) {
+                            const inicio = Math.max(0, indice - 40);
+                            const fim = Math.min(conteudoTexto.length, indice + 60);
+                            snippet = "..." + elementoPagina.innerText.substring(inicio, fim).trim() + "...";
+                        } else {
+                            snippet = elementoPagina.innerText.substring(0, 100) + "...";
+                        }
+                        
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <a href="#" onclick="abrirPaginaPesquisa(event, '${paginaInfo.id}', '${paginaInfo.menuId}')">
+                                <span class="result-title">${paginaInfo.titulo}</span>
+                                <span class="result-snippet">${snippet}</span>
+                            </a>
+                        `;
+                        listaResultados.appendChild(li);
+                    }
+                });
+
+                if (!encontrouAlgo) {
+                     listaResultados.innerHTML = `
+                        <li style="padding: 16px; text-align: center; color: #6B778C; font-size: 0.9rem;">
+                            Nenhum resultado encontrado para "${e.target.value}"
+                        </li>
+                     `;
+                }
+
+                dropdownResultados.style.display = 'block';
+            });
+            
+            // Fecha a caixa suspensa se clicar fora dela
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container')) {
+                    dropdownResultados.style.display = 'none';
                 }
             });
         }
     });
-    // Função para mostrar/esconder a caixa de pesquisa ao clicar na lupa
-    function abrirPesquisa() {
-        const caixa = document.getElementById('caixaBusca');
-        if (caixa.style.display === 'none' || caixa.style.display === '') {
-            caixa.style.display = 'block';
-            caixa.focus(); // Coloca o cursor piscando direto na caixa
-        } else {
-            caixa.style.display = 'none';
-            caixa.value = ''; // Limpa a busca ao fechar
-            filtrarMenu(); // Restaura o menu
-        }
-    }
 
-    // Função que filtra os links do menu lateral
-    document.getElementById('caixaBusca').addEventListener('keyup', filtrarMenu);
-    // Função que decide o que a lupa faz (abrir a caixa no celular ou pesquisar)
+    // Função que executa a transição de ecrã ao clicar num resultado
+    function abrirPaginaPesquisa(event, idPagina, idMenuSanfona) {
+        event.preventDefault();
+        
+        // Esconde o dropdown e limpa a barra
+        document.getElementById('resultadosBusca').style.display = 'none';
+        document.getElementById('caixaBusca').value = '';
+        
+        // Muda para a página escolhida 
+        const todasSecoes = document.querySelectorAll('.secao-conteudo');
+        todasSecoes.forEach(secao => secao.style.display = 'none');
+        
+        const secaoParaMostrar = document.getElementById(idPagina);
+        if (secaoParaMostrar) {
+            secaoParaMostrar.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Atualiza o estado visual do menu lateral
+        document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('item-ativo'));
+        document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('open'));
+        
+        const menuPai = document.getElementById(idMenuSanfona);
+        if (menuPai) {
+            menuPai.classList.add('open');
+            // Encontra e ativa o link correto no menu lateral
+            const linkExato = Array.from(menuPai.querySelectorAll('a')).find(
+                a => a.getAttribute('onclick') && a.getAttribute('onclick').includes(idPagina)
+            );
+            if (linkExato) linkExato.classList.add('item-ativo');
+        }
+}
+    
+    // Função extra caso clique na lupa (foca na caixa de texto)
     function acionarLupa() {
         const caixa = document.getElementById('caixaBusca');
-        
-        // Verifica se estamos na tela de celular (largura menor ou igual a 900px)
-        if (window.innerWidth <= 900) {
-            // Se a caixa não tem a classe que a deixa visível, mostre-a!
-            if (!caixa.classList.contains('mostrar-mobile')) {
-                caixa.classList.add('mostrar-mobile');
-                caixa.focus(); // Coloca o cursor para digitar
-                return; // Para a execução por aqui
-            } 
-            // Se a caixa já está visível e o usuário clicou na lupa com ela vazia, esconde de novo
-            else if (caixa.value.trim() === '') {
-                caixa.classList.remove('mostrar-mobile');
-                filtrarMenu(); // Reseta o menu
-                return;
-            }
-        }
-        
-        // Se estiver no PC ou se já houver texto digitado no celular, faz a pesquisa normal
-    }
-    function filtrarMenu() {
-        const textoBusca = document.getElementById('caixaBusca').value.toLowerCase();
-        const categoriasPrincipais = document.querySelectorAll('.sidebar-menu > li');
-
-        categoriasPrincipais.forEach(function(categoria) {
-            const submenu = categoria.querySelector('.submenu');
-            let temResultadoNaCategoria = false;
-
-            if (submenu) {
-                const itensSubmenu = submenu.querySelectorAll('li'); 
-                
-                itensSubmenu.forEach(function(item) {
-                    const link = item.querySelector('a');
-                    if (!link) return;
-                    
-                    const textoLink = link.innerText.toLowerCase();
-                    let textoConteudo = "";
-                    
-                    const onclickTexto = link.getAttribute('onclick');
-                    if (onclickTexto && onclickTexto.includes('mudarConteudo')) {
-                        const partes = onclickTexto.split("'");
-                        if (partes.length >= 3) {
-                            const idDaPagina = partes[1];
-                            const pagina = document.getElementById(idDaPagina);
-                            if (pagina) {
-                                textoConteudo = pagina.innerText.toLowerCase();
-                            }
-                        }
-                    }
-
-                    if (textoLink.includes(textoBusca) || textoConteudo.includes(textoBusca)) {
-                        item.style.display = 'block';
-                        temResultadoNaCategoria = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                if (temResultadoNaCategoria) {
-                    categoria.style.display = 'block';
-                    submenu.classList.add('open');
-                } else {
-                    categoria.style.display = 'none';
-                }
-            }
-        });
-        
-        if (textoBusca === '') {
-             document.querySelectorAll('.submenu').forEach(function(sub) {
-                 sub.classList.remove('open');
-             });
-             const primeiroSub = document.querySelector('.submenu');
-             if(primeiroSub) primeiroSub.classList.add('open');
-        }
-        
-        
-        // Se o utilizador apagar a busca (caixa vazia), restaura o menu para o estado inicial
-        if (textoBusca === '') {
-             document.querySelectorAll('.submenu').forEach(function(sub) {
-                 sub.classList.remove('open'); // Fecha todas as sanfonas
-             });
-             // Abre apenas a primeira sanfona como padrão
-             const primeiroSub = document.querySelector('.submenu');
-             if(primeiroSub) primeiroSub.classList.add('open');
-        }
-    }
-    </script>
+        if(caixa) caixa.focus();
+}
+</script>
 </body>
 </html>

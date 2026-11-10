@@ -361,3 +361,95 @@ img {
 #caixaBusca:focus {
     border-color: #0052CC;
 }
+.search-container {
+    position: relative; /* Fundamental para o dropdown ficar preso aqui */
+    display: inline-block;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Caixa de Resultados (Dropdown estilo Atlassian) */
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 400px; /* Mais largo para imitar a imagem 5 */
+    margin-top: 8px;
+    background-color: #FFFFFF;
+    border: 1px solid #DFE1E6;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.search-header {
+    padding: 12px 16px;
+    background-color: #F4F5F7;
+    border-bottom: 1px solid #EBECF0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5E6C84;
+}
+
+.search-results-list {
+    list-style: none;
+    max-height: 350px;
+    overflow-y: auto; /* Permite scroll se houver muitos resultados */
+}
+
+.search-results-list li {
+    border-bottom: 1px solid #F4F5F7;
+}
+
+.search-results-list li:last-child {
+    border-bottom: none;
+}
+
+.search-results-list a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.search-results-list a:hover {
+    background-color: #FAFBFC;
+}
+
+.result-title {
+    font-weight: 600;
+    color: #172B4D;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+/* Destaque para a palavra pesquisada */
+.result-title strong {
+    color: #0052CC; 
+}
+
+.result-snippet {
+    font-size: 0.8rem;
+    color: #6B778C;
+    line-height: 1.4;
+    /* Trunca o texto em 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Ajuste para ecrãs de telemóvel */
+@media (max-width: 900px) {
+    .search-dropdown {
+        width: 300px;
+        position: fixed; /* Fixa no ecrã para não cortar bordas */
+        top: 60px;
+        right: 10px;
+    }
+}
