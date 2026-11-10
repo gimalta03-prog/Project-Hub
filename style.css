@@ -335,6 +335,16 @@ img {
     #caixaBusca {
         width: 140px;
     }
+    #caixaBusca {
+        display: none; 
+        width: 160px; /* Tamanho adaptado para não quebrar a tela */
+    }
+
+    /* O JavaScript vai usar esta classe para mostrar a caixa quando clicar na lupa */
+    #caixaBusca.mostrar-mobile {
+        display: inline-block;
+    }
+
 }
 /* Estilo da caixa de pesquisa */
 #caixaBusca {

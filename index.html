@@ -18,7 +18,7 @@
 
         <div class="nav-actions">
             <input type="text" id="caixaBusca" placeholder="Pesquisar no guia...">
-            <button class="search-btn" aria-label="Pesquisar" onclick="filtrarMenu()">🔍</button>  
+            <button class="search-btn" aria-label="Pesquisar" onclick="acionarLupa()">🔍</button>
         </div>
     </header>
     <div class="container">
@@ -446,7 +446,28 @@
 
     // Função que filtra os links do menu lateral
     document.getElementById('caixaBusca').addEventListener('keyup', filtrarMenu);
-
+    // Função que decide o que a lupa faz (abrir a caixa no celular ou pesquisar)
+    function acionarLupa() {
+        const caixa = document.getElementById('caixaBusca');
+        
+        // Verifica se estamos na tela de celular (largura menor ou igual a 900px)
+        if (window.innerWidth <= 900) {
+            // Se a caixa não tem a classe que a deixa visível, mostre-a!
+            if (!caixa.classList.contains('mostrar-mobile')) {
+                caixa.classList.add('mostrar-mobile');
+                caixa.focus(); // Coloca o cursor para digitar
+                return; // Para a execução por aqui
+            } 
+            // Se a caixa já está visível e o usuário clicou na lupa com ela vazia, esconde de novo
+            else if (caixa.value.trim() === '') {
+                caixa.classList.remove('mostrar-mobile');
+                filtrarMenu(); // Reseta o menu
+                return;
+            }
+        }
+        
+        // Se estiver no PC ou se já houver texto digitado no celular, faz a pesquisa normal
+    }
     function filtrarMenu() {
         const textoBusca = document.getElementById('caixaBusca').value.toLowerCase();
         const categoriasPrincipais = document.querySelectorAll('.sidebar-menu > li');
