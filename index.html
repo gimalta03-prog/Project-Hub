@@ -13,20 +13,14 @@
         <div class="logo">
             <span>Project Hub</span>
         </div>
-        <nav class="main-menu">
-            <ul>
-                <li><a href="#">Funções</a></li>
-                <li><a href="#">Soluções</a></li>
-                <li><a href="#">Guias</a></li>
-                <li><a href="#">Templates</a></li>
-                <li><a href="#">Preços</a></li>
-            </ul>
-        </nav>
+        
+        <!-- Menu central removido daqui -->
+
         <div class="nav-actions">
-            <button class="search-btn" aria-label="Pesquisar">🔍</button>  
+            <input type="text" id="caixaBusca" placeholder="Pesquisar no guia...">
+            <button class="search-btn" aria-label="Pesquisar" onclick="abrirPesquisa()">🔍</button>  
         </div>
     </header>
-
     <div class="container">
         <!-- BARRA LATERAL -->
         <aside class="sidebar">
@@ -438,6 +432,40 @@
             primeiroLink.classList.add('item-ativo');
         }
     });
+    // Função para mostrar/esconder a caixa de pesquisa ao clicar na lupa
+    function abrirPesquisa() {
+        const caixa = document.getElementById('caixaBusca');
+        if (caixa.style.display === 'none' || caixa.style.display === '') {
+            caixa.style.display = 'block';
+            caixa.focus(); // Coloca o cursor piscando direto na caixa
+        } else {
+            caixa.style.display = 'none';
+            caixa.value = ''; // Limpa a busca ao fechar
+            filtrarMenu(); // Restaura o menu
+        }
+    }
+
+    // Função que filtra os links do menu lateral
+    document.getElementById('caixaBusca').addEventListener('keyup', filtrarMenu);
+
+    function filtrarMenu() {
+        const textoBusca = document.getElementById('caixaBusca').value.toLowerCase();
+        const linksMenu = document.querySelectorAll('.sidebar-menu li a');
+
+        linksMenu.forEach(function(link) {
+            const textoLink = link.innerText.toLowerCase();
+            
+            // Se o texto digitado estiver no link, mostra. Se não, esconde.
+            if (textoLink.includes(textoBusca)) {
+                link.style.display = 'block';
+                // Garante que o submenu pai fique aberto se um item filho for encontrado
+                const submenu = link.closest('.submenu');
+                if (submenu) submenu.classList.add('open');
+            } else {
+                link.style.display = 'none';
+            }
+        });
+    }
     </script>
 </body>
 </html>

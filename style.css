@@ -324,15 +324,29 @@ img {
 
     /* Centraliza os itens do cabeçalho */
     .top-nav {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-between; 
         align-items: center;
-        text-align: center;
-        padding: 10px;
+        padding: 12px 16px;
     }
 
-    .main-menu ul {
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 10px;
+    /* Diminui a caixa de busca em telas muito pequenas */
+    #caixaBusca {
+        width: 140px;
     }
+}
+/* Estilo da caixa de pesquisa */
+#caixaBusca {
+    display: none; /* Começa escondida */
+    padding: 8px 12px;
+    border: 1px solid #DFE1E6;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.9rem;
+    width: 200px;
+}
+
+#caixaBusca:focus {
+    border-color: #0052CC;
 }
