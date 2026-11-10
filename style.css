@@ -338,13 +338,14 @@ img {
 }
 /* Estilo da caixa de pesquisa */
 #caixaBusca {
-    display: none; /* Começa escondida */
+    display: inline-block; 
     padding: 8px 12px;
     border: 1px solid #DFE1E6;
     border-radius: 4px;
     outline: none;
     font-size: 0.9rem;
-    width: 200px;
+    width: 250px;
+    margin-right: 8px; /* Dá um espacinho entre a caixa e a lupa */
 }
 
 #caixaBusca:focus {

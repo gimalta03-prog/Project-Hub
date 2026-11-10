@@ -18,7 +18,7 @@
 
         <div class="nav-actions">
             <input type="text" id="caixaBusca" placeholder="Pesquisar no guia...">
-            <button class="search-btn" aria-label="Pesquisar" onclick="abrirPesquisa()">🔍</button>  
+            <button class="search-btn" aria-label="Pesquisar" onclick="filtrarMenu()">🔍</button>  
         </div>
     </header>
     <div class="container">
@@ -421,15 +421,14 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const primeiroLink = document.querySelector('.sidebar-menu .submenu a');
-        const primeiroSubmenu = document.querySelector('.submenu');
-        
-        if (primeiroSubmenu) {
-            primeiroSubmenu.classList.add('open');
-        }
-        if (primeiroLink) {
-            primeiroLink.classList.add('item-ativo');
+   document.addEventListener('DOMContentLoaded', function() {
+        const caixaBusca = document.getElementById('caixaBusca');
+        if(caixaBusca) {
+            caixaBusca.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filtrarMenu();
+                }
+            });
         }
     });
     // Função para mostrar/esconder a caixa de pesquisa ao clicar na lupa
@@ -450,21 +449,69 @@
 
     function filtrarMenu() {
         const textoBusca = document.getElementById('caixaBusca').value.toLowerCase();
-        const linksMenu = document.querySelectorAll('.sidebar-menu li a');
+        const categoriasPrincipais = document.querySelectorAll('.sidebar-menu > li');
 
-        linksMenu.forEach(function(link) {
-            const textoLink = link.innerText.toLowerCase();
-            
-            // Se o texto digitado estiver no link, mostra. Se não, esconde.
-            if (textoLink.includes(textoBusca)) {
-                link.style.display = 'block';
-                // Garante que o submenu pai fique aberto se um item filho for encontrado
-                const submenu = link.closest('.submenu');
-                if (submenu) submenu.classList.add('open');
-            } else {
-                link.style.display = 'none';
+        categoriasPrincipais.forEach(function(categoria) {
+            const submenu = categoria.querySelector('.submenu');
+            let temResultadoNaCategoria = false;
+
+            if (submenu) {
+                const itensSubmenu = submenu.querySelectorAll('li'); 
+                
+                itensSubmenu.forEach(function(item) {
+                    const link = item.querySelector('a');
+                    if (!link) return;
+                    
+                    const textoLink = link.innerText.toLowerCase();
+                    let textoConteudo = "";
+                    
+                    const onclickTexto = link.getAttribute('onclick');
+                    if (onclickTexto && onclickTexto.includes('mudarConteudo')) {
+                        const partes = onclickTexto.split("'");
+                        if (partes.length >= 3) {
+                            const idDaPagina = partes[1];
+                            const pagina = document.getElementById(idDaPagina);
+                            if (pagina) {
+                                textoConteudo = pagina.innerText.toLowerCase();
+                            }
+                        }
+                    }
+
+                    if (textoLink.includes(textoBusca) || textoConteudo.includes(textoBusca)) {
+                        item.style.display = 'block';
+                        temResultadoNaCategoria = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (temResultadoNaCategoria) {
+                    categoria.style.display = 'block';
+                    submenu.classList.add('open');
+                } else {
+                    categoria.style.display = 'none';
+                }
             }
         });
+        
+        if (textoBusca === '') {
+             document.querySelectorAll('.submenu').forEach(function(sub) {
+                 sub.classList.remove('open');
+             });
+             const primeiroSub = document.querySelector('.submenu');
+             if(primeiroSub) primeiroSub.classList.add('open');
+        }
+        
+        
+        // Se o utilizador apagar a busca (caixa vazia), restaura o menu para o estado inicial
+        if (textoBusca === '') {
+             document.querySelectorAll('.submenu').forEach(function(sub) {
+                 sub.classList.remove('open'); // Fecha todas as sanfonas
+             });
+             // Abre apenas a primeira sanfona como padrão
+             const primeiroSub = document.querySelector('.submenu');
+             if(primeiroSub) primeiroSub.classList.add('open');
+        }
     }
     </script>
 </body>
